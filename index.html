@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Management CRUD</title>
+
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+    <style>
+        body {
+            background-color: #ffffff;
+        }
+
+        .main-title {
+            color: #243b5a;
+            font-weight: 700;
+        }
+
+        .blue-text {
+            color: #1677e8;
+        }
+
+        .form-section,
+        .filter-section,
+        .table-section {
+            border: 1px solid #dce5ef;
+            border-radius: 10px;
+            background-color: #ffffff;
+        }
+
+        .form-control,
+        .form-select {
+            height: 45px;
+        }
+
+        .table th {
+            color: #243b5a;
+        }
+
+        .add-btn {
+            height: 45px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container-fluid px-4 py-4">
+
+        <!-- Heading -->
+        <div class="text-center mb-4">
+
+            <h1 class="main-title">
+                <i class="bi bi-mortarboard-fill blue-text"></i>
+                Student Management
+                <span class="blue-text">CRUD</span>
+            </h1>
+
+            <p class="text-secondary">
+                Add, View, Edit and Delete Student Records
+            </p>
+
+            <div class="mx-auto bg-primary" style="width: 70px; height: 3px;"></div>
+
+        </div>
+
+
+        <!-- Student Form -->
+        <div class="form-section p-4 mb-4">
+
+            <form id="studentform">
+
+                <div class="row g-4 align-items-end">
+                    <input type="text" id="editstatus" hidden>
+
+                    <!-- Student Name -->
+                    <div class="col-lg-4">
+
+                        <label for="studentname" class="form-label fw-semibold">
+                            Student Name
+                        </label>
+
+                        <input type="text" id="studentname" class="form-control" placeholder="Enter student name">
+
+                    </div>
+
+
+                    <!-- Course -->
+                    <div class="col-lg-3">
+
+                        <label for="course" class="form-label fw-semibold">
+                            Course
+                        </label>
+
+                        <select id="course" class="form-select">
+
+                            <option value="">
+                                Select course
+                            </option>
+
+                            <option value="Computer Science">
+                                Computer Science
+                            </option>
+
+                            <option value="Information Technology">
+                                Information Technology
+                            </option>
+
+                            <option value="Mechanical Engineering">
+                                Mechanical Engineering
+                            </option>
+
+                            <option value="Business Administration">
+                                Business Administration
+                            </option>
+
+                            <option value="Electronics & Communication">
+                                Electronics & Communication
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- Phone -->
+                    <div class="col-lg-3">
+
+                        <label for="phone" class="form-label fw-semibold">
+                            Phone
+                        </label>
+
+                        <input type="text" id="phone" class="form-control" placeholder="Enter phone number">
+
+                    </div>
+
+
+                    <!-- Add Button -->
+                    <div class="col-lg-2">
+
+                        <button type="submit" id="addbtn" class="btn btn-success w-100 add-btn">
+
+                            <i class="bi bi-plus-lg"></i>
+                            Add Student
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </form>
+
+        </div>
+
+
+        <!-- Search & Filter -->
+        <div class="filter-section p-3 mb-5">
+
+            <div class="row g-4">
+
+
+                <!-- Search -->
+                <div class="col-lg-6">
+
+                    <label for="searchstudent" class="form-label fw-semibold">
+                        filter by Name
+                    </label>
+
+                    <div class="input-group">
+
+                        <span class="input-group-text bg-white">
+                            <i class="bi bi-search"></i>
+                        </span>
+
+                        <input type="text" id="searchstudent" class="form-control"
+                            placeholder="Search by student name...">
+
+                    </div>
+
+                </div>
+
+
+                <!-- Course Filter -->
+                <div class="col-lg-6">
+
+                    <label for="filtercourse" class="form-label fw-semibold">
+                        Course
+                    </label>
+
+                    <select id="filtercourse" class="form-select">
+
+                        <option value="">
+                            All Courses
+                        </option>
+
+                        <option value="Computer Science">
+                            Computer Science
+                        </option>
+
+                        <option value="Information Technology">
+                            Information Technology
+                        </option>
+
+                        <option value="Mechanical Engineering">
+                            Mechanical Engineering
+                        </option>
+
+                        <option value="Business Administration">
+                            Business Administration
+                        </option>
+
+                        <option value="Electronics & Communication">
+                            Electronics & Communication
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- Table -->
+        <div class="table-section overflow-hidden">
+
+            <div class="table-responsive">
+
+                <table class="table  table-hover table-striped mb-0 text-center">
+
+                    <thead class="table-primary">
+
+                        <tr>
+
+                            <th class="text-center">#</th>
+
+                            <th>Student Name</th>
+
+                            <th>Course</th>
+
+                            <th>Phone</th>
+
+                            <th class="text-center">Action</th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="tablebody">
+
+
+
+                    </tbody>
+
+                </table>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./main.js"></script>
+    <!-- JavaScript -->
+    <script src="./main.js"></script>
+
+</body>
+
+</html>
